@@ -4,6 +4,7 @@
 
 Islandora Badges displays various metrics (and other) badges on objects. Each badge is created by a submodule. Available badges include:
 * Altmetrics: display social media interactions
+* Crossref citations: Citation counts via Crossref
 * Scopus: Citation counts via the Scopus database
 * Web of Science: Citation counts via Web of Science
 * oaDOI: Provides a link to a fulltext document for objects without a PDF datastream, via the oadoi.org API
@@ -15,7 +16,6 @@ Badges will only display on objects that have a MODS datastream and a DOI (digit
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
-* [Islandora Scholar](https://github.com/Islandora/islandora_scholar)
 
 ## Installation
 
@@ -28,10 +28,10 @@ Configuration path is admin/islandora/tools/badges (Administration > Islandora >
 There are two administration fields:
 
 * DOI XPath
-     * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] 
+     * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] Note that XPATH is case-sensitive.
      * A default is included and should serve most repositories, but you can change it if yours is located elsewhere.
 * Content models
-     * Choose which CModels are able to display badges (Currently only applies to Altmetrics)
+     * Choose which CModels are able to display badges.
      
 ## Submodules
 
@@ -40,7 +40,12 @@ These modules provide the actual badges:
 * [Islandora Altmetrics](modules/islandora_altmetrics/)
 * [Islandora Scopus](modules/islandora_scopus/)
 * [Islandora Web of Science](modules/islandora_wos/)
-* [Islandora oaDOI](modules/islandora_oadio/)
+* [Islandora oaDOI](modules/islandora_oadoi/)
+* [Islandora Crossref Citations](modules/islandora_crossref_citations)
+
+##Documentation
+
+Further documentation for this module is available at https://wiki.duraspace.org/x/bhpsBQ
 
 ## Troubleshooting/Issues
 
