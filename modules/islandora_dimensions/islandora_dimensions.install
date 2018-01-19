@@ -7,7 +7,7 @@
 /**
  * Implements hook_uninstall().
  */
-function islandora_oadoi_uninstall() {
+function islandora_dimensions_uninstall() {
   $vars = array(
     islandora_dimensions_badge,
   );
