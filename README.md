@@ -5,6 +5,7 @@
 Islandora Badges displays various metrics (and other) badges on objects. Each badge is created by a submodule. Available badges include:
 * Altmetrics: display social media interactions
 * Crossref citations: Citation counts via Crossref
+* Dimensions.ai citations: Citation counts via Dimensions.ai
 * Scopus: Citation counts via the Scopus database
 * Web of Science: Citation counts via Web of Science
 * oaDOI: Provides a link to a fulltext document for objects without a PDF datastream, via the oadoi.org API
@@ -42,6 +43,7 @@ These modules provide the actual badges:
 * [Islandora Web of Science](modules/islandora_wos/)
 * [Islandora oaDOI](modules/islandora_oadoi/)
 * [Islandora Crossref Citations](modules/islandora_crossref_citations)
+* [Islandora Dimensions.ai](modules/islandora_dimensions)
 
 ##Documentation
 
