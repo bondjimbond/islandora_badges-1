@@ -1,0 +1,5 @@
+name = Islandora CC Badge
+core = 7.x
+description = Displays a Ceative Commons badge.
+dependencies[] = islandora_badges
+package = Islandora Tools
