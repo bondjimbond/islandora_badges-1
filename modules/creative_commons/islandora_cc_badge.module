@@ -50,13 +50,22 @@ function islandora_cc_badge_get_license(AbstractObject $object) {
   $qp->solrStart = 0;
   $qp->solrLimit = 100000;
   $qp->executeQuery(FALSE);
-  $license_uri_array = ($qp->islandoraSolrResult['response']['objects']['0']['solr_doc'][$uri_field]);
-  foreach ($license_uri_array as $uri) {
-    if (strpos($uri, 'creativecommons.org')) {
-      $license_uri = $uri;
+  if ($qp->islandoraSolrResult['response']['numFound'] > 0) {
+    if (array_key_exists($uri_field, $qp->islandoraSolrResult['response']['objects']['0']['solr_doc'])) {
+      $license_uri_array = ($qp->islandoraSolrResult['response']['objects']['0']['solr_doc'][$uri_field]);
+      foreach ($license_uri_array as $uri) {
+        if (strpos($uri, 'creativecommons.org')) {
+          $license_uri = $uri;
+        }
+      }
     }
   }
-  return $license_uri;
+  if (!isset($license_uri)) {
+    return;
+  }
+  else {
+    return $license_uri;
+  }
 }
 
 

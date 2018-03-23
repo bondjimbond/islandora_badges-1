@@ -109,11 +109,20 @@ function islandora_rightsstatements_get_uri(AbstractObject $object) {
   $qp->solrStart = 0;
   $qp->solrLimit = 100000;
   $qp->executeQuery(FALSE);
-  $rights_uri_array = ($qp->islandoraSolrResult['response']['objects']['0']['solr_doc'][$uri_field]);
-  foreach ($rights_uri_array as $uri) {
-    if (strpos($uri, 'rightsstatements.org')) {
-      $rights_uri = $uri;
+  if ($qp->islandoraSolrResult['response']['numFound'] > 0) {
+    if (array_key_exists($uri_field, $qp->islandoraSolrResult['response']['objects']['0']['solr_doc'])) {
+      $rights_uri_array = ($qp->islandoraSolrResult['response']['objects']['0']['solr_doc'][$uri_field]);
+      foreach ($rights_uri_array as $uri) {
+        if (strpos($uri, 'rightsstatements.org')) {
+          $rights_uri = $uri;
+        }
+      }
     }
   }
-  return $rights_uri;
+  if (!isset($rights_uri)) {
+    return;
+  }
+  else {
+    return $rights_uri;
+  }
 }
