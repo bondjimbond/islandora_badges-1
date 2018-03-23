@@ -2,16 +2,17 @@
 
 ## Introduction
 
-Islandora CC Badge provides block containing a Creative Commons license image and a link to the CC license details.
-It reads the CC License URI from a MODS element in your object's metadata, and queries the Creative Commons API to return the badge.
+Islandora Rightsstatements provides block containing a Rightsstatements.org button with a link to the statement URI and its details.
+It reads the Rightsstatements.org URI from a Solr field, and builds the HTML from the appropriate assets at Rightsstatements.org.
 
-The badge will only display on objects with a MODS datastream and a Creative Commons License URI in some defined element.
+The badge will only display on objects with a Rightsstatements.org URI in some defined element.
 
 ## Requirements
 
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
+* [Islandora Solr](https://github.com/islandora/islandora_solr)
 * [Islandora Badges](../../)
 
 ## Installation
@@ -22,7 +23,9 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 Configuration path is admin/islandora/tools/badges/creativecommons (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > CC Badge).
 
-Xpath to Creative Commoons badge URI: Points to the element that contains your URI. Begins with "/mods:mods/"
+* Solr field for Rightsstatements.org URI: Defaults to mods_accessCondition_ms. dc.rights would also be a good choice. Prefer a multivalued field.
+* Image Height: Set the image height in pixels.
+* Image Text Colour: Rightsstatements.org provides buttons with black text or blue text.
 
 ## Troubleshooting/Issues
 

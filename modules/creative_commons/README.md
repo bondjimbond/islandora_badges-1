@@ -12,6 +12,7 @@ The badge will only display on objects with a MODS datastream and a Creative Com
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
+* [Islandora Solr](https://github.com/islandora/islandora_solr)
 * [Islandora Badges](../../)
 
 ## Installation
@@ -22,7 +23,7 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 Configuration path is admin/islandora/tools/badges/creativecommons (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > CC Badge).
 
-Xpath to Creative Commoons badge URI: Points to the element that contains your URI. Begins with "/mods:mods/"
+Solr field for Creative Commons license URI: Defaults to mods_accessCondition_ms. Multivalued field recommended if working with other accessCondition fields.
 
 ## Troubleshooting/Issues
 

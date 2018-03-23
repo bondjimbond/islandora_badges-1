@@ -82,6 +82,7 @@ function islandora_cc_badge_block_view($delta = '') {
             $result_json = json_encode($result_xml);
             $result_array = json_decode($result_json, TRUE);
             $result_data = $result_array['data'];
+            // Trim the result to show just the image and link.
             $result_final = strstr($result_data, '<a rel="license"');
             $result_final = strstr($result_final, '<br/>', true);
           }
