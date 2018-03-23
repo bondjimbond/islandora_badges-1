@@ -13,6 +13,14 @@ function islandora_rightsstatements_admin_form($form, $form_settings) {
     '#description' => t('Xpath to Rightsstatements badge URI. Note: Xpaths are case-sensitive.'),
     '#default_value' => variable_get('islandora_rightsstatements_path', '/mods:mods/mods:accessCondition[@type="use and reproduction"]'),
   );
+
+  $form['islandora_rightsstatements_rights_field'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Solr field for Rightsstatements.org URI'),
+    '#description' => t('The solr field'),
+    '#default_value' => variable_get('islandora_rightsstatements_rights_field', 'mods_accessCondition_ms'),
+  );
+
   $form['islandora_rightsstatements_image_height'] = array(
     '#type' => 'textfield',
     '#title' => t('Image Height'),

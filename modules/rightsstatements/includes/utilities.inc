@@ -9,7 +9,6 @@
  * Take URI, return HTML code for a rights statement badge.
  * @return string
  */
-
 function islandora_rightsstatements_get_html($uri) {
   $height = variable_get('islandora_rightsstatements_image_height', '31');
   $colour = variable_get('islandora_rightsstatements_image_colour', 'black');
@@ -89,4 +88,32 @@ function islandora_rightsstatements_get_html($uri) {
     ),
   );
   return $badge;
+}
+
+/**
+ * Get URI from the configured Solr field.
+ * @return string
+ */
+function islandora_rightsstatements_get_uri(AbstractObject $object) {
+  // Gets the rightsstatements.org URI from the configured Solr field.
+  $qp = new islandoraSolrQueryProcessor();
+  $qp->buildQuery(format_string('@field:"@pid"', array(
+    '@field' => 'PID',
+    '@pid' =>"{$object->id}")
+  ));
+  $uri_field = variable_get('islandora_rightsstatements_rights_field', 'mods_accessCondition_ms');
+  $qp->solrParams['fl'] = implode(', ', array(
+    'PID',
+    $uri_field,
+  ));
+  $qp->solrStart = 0;
+  $qp->solrLimit = 100000;
+  $qp->executeQuery(FALSE);
+  $rights_uri_array = ($qp->islandoraSolrResult['response']['objects']['0']['solr_doc'][$uri_field]);
+  foreach ($rights_uri_array as $uri) {
+    if (strpos($uri, 'rightsstatements.org')) {
+      $rights_uri = $uri;
+    }
+  }
+  return $rights_uri;
 }

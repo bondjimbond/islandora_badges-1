@@ -35,30 +35,6 @@ function islandora_rightsstatements_block_info() {
   );
 }
 
-function islandora_rightsstatements_get_statement(AbstractObject $object) {
-  // Get the Rightsstatements URI from the MODS record.
-  $doc = new DOMDocument();
-  $doc->loadXML($object['MODS']->content);
-  $xpath = new DOMXPath($doc);
-  $xpath->registerNamespace('mods', 'http://www.loc.gov/mods/v3');
-  $xpath_results = $xpath->query(
-    variable_get('islandora_rightsstatements_path', '/mods:mods/mods:accessCondition[@type="use and reproduction"')
-  );
-  if ($xpath_results->length == 0) {
-    return FALSE;
-  }
-  $rightsstatement = $xpath_results->item(0)->nodeValue;
-  if (!$rightsstatement) {
-    return FALSE;
-  }
-  return $rightsstatement;
-}
-
-function islandora_rightsstatements_get_solr(AbstractObject $object) {
-
-}
-
-
 /**
  * Implements hook_block_view().
  */
@@ -72,7 +48,7 @@ function islandora_rightsstatements_block_view($delta = '') {
     if ($object) {
       // Check CModel against Badges configuration.
       if (islandora_badges_show_for_cmodel($object)) {
-        $uri = islandora_rightsstatements_get_statement($object);
+        $uri = islandora_rightsstatements_get_uri($object);
         $badge = islandora_rightsstatements_get_html($uri);
         $to_render['content'] = $badge;
       }
