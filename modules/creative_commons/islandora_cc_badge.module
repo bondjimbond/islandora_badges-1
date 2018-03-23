@@ -36,22 +36,27 @@ function islandora_cc_badge_block_info() {
 }
 
 function islandora_cc_badge_get_license(AbstractObject $object) {
-  // Get the CC license URI from the MODS record.
-  $doc = new DOMDocument();
-  $doc->loadXML($object['MODS']->content);
-  $xpath = new DOMXPath($doc);
-  $xpath->registerNamespace('mods', 'http://www.loc.gov/mods/v3');
-  $xpath_results = $xpath->query(
-    variable_get('islandora_cc_badge_path', '/mods:mods/mods:accessCondition[@type="use and reproduction"]')
-  );
-  if ($xpath_results->length == 0) {
-    return FALSE;
+  // Gets the rightsstatements.org URI from the configured Solr field.
+  $qp = new islandoraSolrQueryProcessor();
+  $qp->buildQuery(format_string('@field:"@pid"', array(
+    '@field' => 'PID',
+    '@pid' =>"{$object->id}")
+  ));
+  $uri_field = variable_get('islandora_cc_badge_license_field', 'mods_accessCondition_ms');
+  $qp->solrParams['fl'] = implode(', ', array(
+    'PID',
+    $uri_field,
+  ));
+  $qp->solrStart = 0;
+  $qp->solrLimit = 100000;
+  $qp->executeQuery(FALSE);
+  $license_uri_array = ($qp->islandoraSolrResult['response']['objects']['0']['solr_doc'][$uri_field]);
+  foreach ($license_uri_array as $uri) {
+    if (strpos($uri, 'creativecommons.org')) {
+      $license_uri = $uri;
+    }
   }
-  $license = $xpath_results->item(0)->nodeValue;
-  if (!$license) {
-    return FALSE;
-  }
-  return $license;
+  return $license_uri;
 }
 
 

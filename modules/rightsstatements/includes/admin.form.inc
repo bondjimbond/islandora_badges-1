@@ -7,17 +7,10 @@
  * Admin form: configure CC URI xpath.
  */
 function islandora_rightsstatements_admin_form($form, $form_settings) {
-  $form['islandora_rightsstatements_path'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Xpath to Rightsstatements badge URI'),
-    '#description' => t('Xpath to Rightsstatements badge URI. Note: Xpaths are case-sensitive.'),
-    '#default_value' => variable_get('islandora_rightsstatements_path', '/mods:mods/mods:accessCondition[@type="use and reproduction"]'),
-  );
-
   $form['islandora_rightsstatements_rights_field'] = array(
     '#type' => 'textfield',
     '#title' => t('Solr field for Rightsstatements.org URI'),
-    '#description' => t('The solr field'),
+    '#description' => t('The solr field that contains the Rightsstatements.org URI'),
     '#default_value' => variable_get('islandora_rightsstatements_rights_field', 'mods_accessCondition_ms'),
   );
 
