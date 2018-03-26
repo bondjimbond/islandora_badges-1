@@ -11,7 +11,7 @@ function islandora_cc_badge_admin_form($form, $form_settings) {
     '#type' => 'textfield',
     '#title' => t('Solr field for Creative Commons license URI'),
     '#description' => t('Solr field that contains the CC license URI.'),
-    '#default_value' => variable_get('islandora_cc_badge_license_field', 'mods_accessCondition_ms'),
+    '#default_value' => variable_get('islandora_cc_badge_license_field', 'dc.rights'),
   );
 
   return system_settings_form($form);

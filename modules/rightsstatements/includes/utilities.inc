@@ -101,7 +101,7 @@ function islandora_rightsstatements_get_uri(AbstractObject $object) {
     '@field' => 'PID',
     '@pid' =>"{$object->id}")
   ));
-  $uri_field = variable_get('islandora_rightsstatements_rights_field', 'mods_accessCondition_ms');
+  $uri_field = variable_get('islandora_rightsstatements_rights_field', 'dc.rights');
   $qp->solrParams['fl'] = implode(', ', array(
     'PID',
     $uri_field,

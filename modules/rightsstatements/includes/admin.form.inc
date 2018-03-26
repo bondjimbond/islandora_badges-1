@@ -11,7 +11,7 @@ function islandora_rightsstatements_admin_form($form, $form_settings) {
     '#type' => 'textfield',
     '#title' => t('Solr field for Rightsstatements.org URI'),
     '#description' => t('The solr field that contains the Rightsstatements.org URI'),
-    '#default_value' => variable_get('islandora_rightsstatements_rights_field', 'mods_accessCondition_ms'),
+    '#default_value' => variable_get('islandora_rightsstatements_rights_field', 'dc.rights'),
   );
 
   $form['islandora_rightsstatements_image_height'] = array(
