@@ -1,4 +1,4 @@
-# Islandora Creative Commons Badge
+# Islandora Rights Statements Badge
 
 ## Introduction
 
