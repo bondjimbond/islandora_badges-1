@@ -24,52 +24,27 @@ function islandora_rightsstatements_get_html($uri) {
 
   $image = 'http://rightsstatements.org/files/buttons/' . $terms . '.dark-white-interior' . $colour . '.png';
 
-  if ($uri == 'http://rightsstatements.org/vocab/CNE/1.0/') {
-    $alt_text = 'Copyright Not Evaluated';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/UND/1.0/') {
-    $alt_text = 'Copyright Undetermined';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/InC/1.0/') {
-    $alt_text = 'In Copyright';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/InC-EDU/1.0/') {
-    $alt_text = 'In Copyright - Educational Use Permitted';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/') {
-    $alt_text = 'In Copyright - EU Orphan Work';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/InC-NC/1.0/') {
-    $alt_text = 'In Copyright - Non-Commercial Use Permitted';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/InC-RUU/1.0/') {
-    $alt_text = 'In Copyright - Rights Holders Unlocatable or Unidentifiable';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/NoC-CR/1.0/') {
-    $alt_text = 'No Copyright - Contractual Restrictions';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/NoC-NC/1.0/') {
-    $alt_text = 'No Copyright - Non-Commercial Use Only';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/') {
-    $alt_text = 'No Copyright - Other Known Legal Restrictions';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/NoC-US/1.0/') {
-    $alt_text = 'No Copyright - United States';
-  }
-  elseif ($uri == 'http://rightsstatements.org/vocab/NKC/1.0/') {
-    $alt_text = 'No Known Copyright';
-  }
-  else {
-    return;
-  }
-  
+  $options = array(
+    'method' => 'GET',
+    'headers' => array(
+      'Accept' => 'application/json',
+    ),
+  );
+  // The result has lots of objects that must be turned into arrays.
+  $result = get_object_vars(drupal_http_request($uri, $options));
+  $result_json = get_object_vars(drupal_http_request($result['headers']['location']));
+  $result_json = get_object_vars(json_decode($result_json['data']));
+  $definition = get_object_vars($result_json['definition'])['@value'];
+  $note = get_object_vars($result_json['note']['0'])['@value'];
+  $title = get_object_vars($result_json['prefLabel'])['@value'];
+  $alt_text = $title . '<p>' . $definition . '</p><p>' . $note . '</p>';
+
   $img = array(
     '#theme' => 'image',
     '#path' => $image,
     '#alt' => $alt_text,
     '#height' => $height,
-    '#title' => $alt_text,
+    '#title' => $title,
   );
   $badge = array(
     '#type' => 'link',
