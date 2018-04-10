@@ -11,19 +11,33 @@
  */
 function islandora_rightsstatements_get_html($uri) {
   $height = variable_get('islandora_rightsstatements_image_height', '31');
-  $colour = variable_get('islandora_rightsstatements_image_colour', 'black');
-  if ($colour == 'blue') {
-    $colour = '-blue-type';
-  }
-  else {
-    $colour = '';
-  }
+  $colour = variable_get('islandora_rightsstatements_image_colour', 'dark');
+  $style = variable_get('islandora_rightsstatements_button_style', 'buttons');
+
   // Extract just the statement terms from the URI to use in image URL
   $terms = substr($uri, strpos($uri, "/vocab/")+7);
   $terms = substr($terms, 0, strlen($terms)-5);
-
-  $image = 'http://rightsstatements.org/files/buttons/' . $terms . '.dark-white-interior' . $colour . '.png';
-
+  if ($style == 'icons') {
+    $style_filename = "Icon-Only.";
+    // In case an unavailable colour is picked.
+    if ($colour == 'dark-white-interior-blue-type') {
+      $colour = 'dark-white-interior';
+    }
+    // Choose appropriate icon since they are less precise than buttons.
+    if ($terms == 'CNE' || $terms == 'UND' || $terms == 'NKC') {
+      $terms = 'Other';
+    }
+    elseif (strpos($terms, 'InC') !== false) {
+      $terms = 'InC';
+    }
+    elseif (strpos($terms, 'NoC') !== false) {
+      $terms = 'NoC';
+    }
+  }
+  else {
+    $style_filename = "";
+  }
+  $image = 'https://raw.githubusercontent.com/rightsstatements/rightsstatements.github.io/master/files/' . $style . '/' . $terms . '.' . $style_filename . $colour . '.png';
   $options = array(
     'method' => 'GET',
     'headers' => array(
