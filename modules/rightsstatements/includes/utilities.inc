@@ -18,53 +18,47 @@ function islandora_rightsstatements_get_html($uri) {
   else {
     $colour = '';
   }
+  // Extract just the statement terms from the URI to use in image URL
+  $terms = substr($uri, strpos($uri, "/vocab/")+7);
+  $terms = substr($terms, 0, strlen($terms)-5);
+
+  $image = 'http://rightsstatements.org/files/buttons/' . $terms . '.dark-white-interior' . $colour . '.png';
+
   if ($uri == 'http://rightsstatements.org/vocab/CNE/1.0/') {
     $alt_text = 'Copyright Not Evaluated';
-    $image = 'http://rightsstatements.org/files/buttons/CNE.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/UND/1.0/') {
     $alt_text = 'Copyright Undetermined';
-    $image = 'http://rightsstatements.org/files/buttons/UND.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/InC/1.0/') {
     $alt_text = 'In Copyright';
-    $image = 'http://rightsstatements.org/files/buttons/InC.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/InC-EDU/1.0/') {
     $alt_text = 'In Copyright - Educational Use Permitted';
-    $image = 'http://rightsstatements.org/files/buttons/InC-EDU.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/') {
     $alt_text = 'In Copyright - EU Orphan Work';
-    $image = 'http://rightsstatements.org/files/buttons/InC-OW-EU.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/InC-NC/1.0/') {
     $alt_text = 'In Copyright - Non-Commercial Use Permitted';
-    $image = 'http://rightsstatements.org/files/buttons/InC-NC.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/InC-RUU/1.0/') {
     $alt_text = 'In Copyright - Rights Holders Unlocatable or Unidentifiable';
-    $image = 'http://rightsstatements.org/files/buttons/InC-RUU.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/NoC-CR/1.0/') {
     $alt_text = 'No Copyright - Contractual Restrictions';
-    $image = 'http://rightsstatements.org/files/buttons/NoC-CR.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/NoC-NC/1.0/') {
     $alt_text = 'No Copyright - Non-Commercial Use Only';
-    $image = 'http://rightsstatements.org/files/buttons/NoC-NC.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/') {
     $alt_text = 'No Copyright - Other Known Legal Restrictions';
-    $image = 'http://rightsstatements.org/files/buttons/NoC-OKLR.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/NoC-US/1.0/') {
     $alt_text = 'No Copyright - United States';
-    $image = 'http://rightsstatements.org/files/buttons/NoC-US.dark-white-interior' . $colour . '.png';
   }
   elseif ($uri == 'http://rightsstatements.org/vocab/NKC/1.0/') {
     $alt_text = 'No Known Copyright';
-    $image = 'http://rightsstatements.org/files/buttons/NKC.dark-white-interior' . $colour . '.png';
   }
   else {
     return;
@@ -75,6 +69,7 @@ function islandora_rightsstatements_get_html($uri) {
     '#path' => $image,
     '#alt' => $alt_text,
     '#height' => $height,
+    '#title' => $alt_text,
   );
   $badge = array(
     '#type' => 'link',
