@@ -28,7 +28,7 @@ function islandora_rightsstatements_admin_form($form, $form_settings) {
   
   $form['islandora_rightsstatements_image_colour'] = array(
     '#type' => 'radios',
-    '#title' => t('Image Text Colour'),
+    '#title' => t('Image Colour'),
     '#description' => t('The colour of the text and image in the Rightsstatements badge.'),
     '#options' => array('dark' => t('Black with transparent icon interior'), 'white' => t('All white'), 
       'dark-white-interior' => t('Black with white icon interior'), 'dark-white-interior-blue-type' => t('Black with blue type (Button style only)')),

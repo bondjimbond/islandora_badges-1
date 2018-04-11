@@ -24,8 +24,9 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 Configuration path is admin/islandora/tools/badges/creativecommons (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > CC Badge).
 
 * Solr field for Rightsstatements.org URI: Defaults to mods_accessCondition_ms. dc.rights would also be a good choice. Prefer a multivalued field.
+* Image style: Choose small icon (just the symbol) or Large button (symbol plus text).
 * Image Height: Set the image height in pixels.
-* Image Text Colour: Rightsstatements.org provides buttons with black text or blue text.
+* Image Colour: Rightsstatements.org provides black or white icons, and buttons with black text or blue text.
 
 ## Troubleshooting/Issues
 
