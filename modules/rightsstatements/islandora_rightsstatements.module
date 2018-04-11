@@ -49,6 +49,9 @@ function islandora_rightsstatements_block_view($delta = '') {
       // Check CModel against Badges configuration.
       if (islandora_badges_show_for_cmodel($object)) {
         $uri = islandora_rightsstatements_get_uri($object);
+        if (!isset($uri)) { 
+          return;
+        }
         $badge = islandora_rightsstatements_get_html($uri);
         $to_render['content'] = $badge;
       }
