@@ -82,6 +82,10 @@ function islandora_cc_badge_block_view($delta = '') {
       // Check CModel against Badges configuration.
       if (islandora_badges_show_for_cmodel($object)) {
         $license_uri = islandora_cc_badge_get_license($object);
+        if ($license_uri == "https://creativecommons.org/publicdomain/mark/1.0/") {
+          $result_final = '<a href="' . $license_uri . '" target="_blank"><img src="https://licensebuttons.net/p/mark/1.0/88x31.png"></a>';
+        }
+        else {
           // Set API endpoint URL
           $url = "http://api.creativecommons.org/rest/1.5";
           $request_url = $url . '/details?license-uri=' . $license_uri;
@@ -97,9 +101,10 @@ function islandora_cc_badge_block_view($delta = '') {
           }
         }
       }
-      if (isset($result_final)) {
-        $to_render['content'] = $result_final;
-      }
     }
+    if (isset($result_final)) {
+      $to_render['content'] = $result_final;
+    }
+  }
   return $to_render;
 }
