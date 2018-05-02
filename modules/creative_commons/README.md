@@ -5,6 +5,9 @@
 Islandora CC Badge provides block containing a Creative Commons license image and a link to the CC license details.
 It reads the CC License URI from a MODS element in your object's metadata, and queries the Creative Commons API to return the badge.
 
+Example badge:
+![Example badge](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)
+
 The badge will only display on objects with a MODS datastream and a Creative Commons License URI in some defined element.
 
 ## Requirements
