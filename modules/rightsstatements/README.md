@@ -5,7 +5,7 @@
 Islandora Rightsstatements provides block containing a Rightsstatements.org button with a link to the statement URI and its details.
 It reads the Rightsstatements.org URI from a Solr field, and builds the HTML from the appropriate assets at Rightsstatements.org.
 
-![Example badge](https://github.com/rightsstatements/rightsstatements.github.io/blob/master/files/buttons/InC-EDU.dark.svg)
+![Example badge](https://raw.githubusercontent.com/rightsstatements/rightsstatements.github.io/master/files/buttons/InC.white.png)
 
 The badge will only display on objects with a Rightsstatements.org URI in some defined element.
 
