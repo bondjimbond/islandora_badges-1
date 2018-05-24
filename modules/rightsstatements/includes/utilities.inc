@@ -37,7 +37,8 @@ function islandora_rightsstatements_get_html($uri) {
   else {
     $style_filename = "";
   }
-  $image = 'https://raw.githubusercontent.com/rightsstatements/rightsstatements.github.io/master/files/' . $style . '/' . $terms . '.' . $style_filename . $colour . '.png';
+  $imagepath = drupal_get_path('module', 'islandora_rightsstatements');
+  $image = $imagepath . '/images/' . $style . '/' . $terms . '.' . $style_filename . $colour . '.png';
   $options = array(
     'method' => 'GET',
     'headers' => array(
